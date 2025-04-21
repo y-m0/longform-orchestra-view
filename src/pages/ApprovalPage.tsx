@@ -1,5 +1,4 @@
-
-import DashboardSidebar from "@/components/DashboardSidebar";
+import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ApprovalPage() {

@@ -1,5 +1,4 @@
-
-import DashboardSidebar from "@/components/DashboardSidebar";
+import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { ContentPerformanceChart } from "./scripts/components/ContentPerformanceChart";
 import { WorkflowEfficiencyChart } from "./scripts/components/WorkflowEfficiencyChart";
 

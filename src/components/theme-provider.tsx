@@ -8,11 +8,22 @@ import { type ThemeProviderProps } from "next-themes/dist/types"
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   useEffect(() => {
-    // Remove 'use client' warning since we're not using Next.js
+    // Initialize theme class on document element
     const root = window.document.documentElement
+    const initialColorMode = props.defaultTheme || 'light';
+    
+    // Remove existing theme classes
     root.classList.remove('light', 'dark')
-    root.classList.add(props.defaultTheme || 'light')
-  }, [props.defaultTheme])
+    
+    // Apply stored theme or default
+    const storedTheme = localStorage.getItem(props.storageKey || 'theme')
+    const theme = storedTheme || initialColorMode
+    
+    root.classList.add(theme)
+    
+    // Set data-theme attribute for additional styling hooks
+    root.setAttribute('data-theme', theme)
+  }, [props.defaultTheme, props.storageKey])
 
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }

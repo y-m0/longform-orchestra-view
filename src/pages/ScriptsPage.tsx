@@ -2,7 +2,7 @@
 import { StatsCards } from "@/components/StatsCards";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Clock, Plus, Filter, Calendar, BarChart2, Users, Link, ShieldCheck } from "lucide-react";
+import { FileText, Clock, Plus, Filter, Calendar, BarChart2, Users, Link as LinkIcon, ShieldCheck } from "lucide-react";
 import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { 
@@ -20,8 +20,36 @@ import {
 } from "@/components/ui/sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const ScriptsPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState("content");
+
+  // Parse current tab from URL or use default
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const tab = searchParams.get("tab");
+    if (tab && ["content", "planning", "agents", "workflow", "analytics", "publish"].includes(tab)) {
+      setActiveTab(tab);
+    } else if (!tab) {
+      // If no tab in URL, set default tab in URL
+      const newSearchParams = new URLSearchParams(location.search);
+      newSearchParams.set("tab", activeTab);
+      navigate(`${location.pathname}?${newSearchParams.toString()}`, { replace: true });
+    }
+  }, [location.search, navigate, location.pathname, activeTab]);
+
+  // Handle tab change
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    const newSearchParams = new URLSearchParams(location.search);
+    newSearchParams.set("tab", value);
+    navigate(`${location.pathname}?${newSearchParams.toString()}`);
+  };
+
   // Sample script data
   const scripts = [
     {
@@ -72,7 +100,7 @@ const ScriptsPage = () => {
 
   return (
     <SidebarProvider>
-      <div className="flex h-screen w-full overflow-hidden bg-slate-50">
+      <div className="flex h-screen w-full overflow-hidden bg-slate-50 dark:bg-background">
         <DashboardSidebar />
         <div className="flex flex-1 flex-col overflow-auto">
           <DashboardHeader />
@@ -91,7 +119,7 @@ const ScriptsPage = () => {
             </div>
             
             {/* Intelligence Features Navigation */}
-            <Tabs defaultValue="content" className="w-full">
+            <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
               <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="content" className="flex items-center gap-2">
                   <FileText size={14} />
@@ -114,7 +142,7 @@ const ScriptsPage = () => {
                   <span>Analytics</span>
                 </TabsTrigger>
                 <TabsTrigger value="publish" className="flex items-center gap-2">
-                  <Link size={14} />
+                  <LinkIcon size={14} />
                   <span>Publishing</span>
                 </TabsTrigger>
               </TabsList>
@@ -129,7 +157,7 @@ const ScriptsPage = () => {
                     <CardContent>
                       <div className="flex items-baseline justify-between">
                         <span className="text-3xl font-bold">24</span>
-                        <div className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700">
+                        <div className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700 dark:bg-green-900/30 dark:text-green-400">
                           <span>+3</span>
                           <span>this month</span>
                         </div>
@@ -144,7 +172,7 @@ const ScriptsPage = () => {
                     <CardContent>
                       <div className="flex items-baseline justify-between">
                         <span className="text-3xl font-bold">6</span>
-                        <div className="flex items-center text-amber-600">
+                        <div className="flex items-center text-amber-600 dark:text-amber-400">
                           <Clock size={14} />
                         </div>
                       </div>
@@ -190,7 +218,7 @@ const ScriptsPage = () => {
                                 <span>{script.workflow} ({script.progress}%)</span>
                                 <div className="flex gap-1">
                                   {script.agents.map((agent) => (
-                                    <span key={agent} className="rounded-full bg-slate-100 px-2 py-0.5">
+                                    <span key={agent} className="rounded-full bg-slate-100 px-2 py-0.5 dark:bg-slate-800">
                                       {agent}
                                     </span>
                                   ))}
@@ -205,10 +233,10 @@ const ScriptsPage = () => {
                           </div>
                           <div
                             className={`rounded-full px-2.5 py-0.5 text-xs font-medium
-                              ${script.status === "Approved" ? "bg-green-100 text-green-700" :
-                              script.status === "In Review" ? "bg-blue-100 text-blue-700" :
-                              script.status === "Draft" ? "bg-gray-100 text-gray-700" :
-                              "bg-amber-100 text-amber-700"}`}
+                              ${script.status === "Approved" ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" :
+                              script.status === "In Review" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" :
+                              script.status === "Draft" ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" :
+                              "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"}`}
                           >
                             {script.status}
                           </div>
@@ -288,7 +316,7 @@ const ScriptsPage = () => {
                 </div>
               </TabsContent>
               
-              {/* Other tabs content would follow the same pattern */}
+              {/* Workflow tab content */}
               <TabsContent value="workflow" className="pt-4">
                 <Card>
                   <CardHeader>
@@ -311,8 +339,8 @@ const ScriptsPage = () => {
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                       {["Substack", "Medium", "WordPress", "Ghost"].map((platform) => (
                         <div key={platform} className="flex items-center gap-3 rounded-lg border p-4">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-slate-100">
-                            <Link size={18} className="text-slate-600" />
+                          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-slate-100 dark:bg-slate-800">
+                            <LinkIcon size={18} className="text-slate-600 dark:text-slate-300" />
                           </div>
                           <div>
                             <div className="font-medium">{platform}</div>

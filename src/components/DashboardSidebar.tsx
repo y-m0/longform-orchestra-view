@@ -29,9 +29,12 @@ import {
   Search,
   Check,
 } from "lucide-react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 export function DashboardSidebar() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const menuItems = [
     {
       title: "Overview",
@@ -101,7 +104,7 @@ export function DashboardSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.title} className={currentPath === item.path ? "bg-sidebar-accent/60" : ""}>
                   <SidebarMenuButton asChild>
                     <RouterLink to={item.path} className="flex items-center gap-3">
                       <item.icon size={18} />
@@ -118,7 +121,7 @@ export function DashboardSidebar() {
           <SidebarGroupLabel>Editorial Tools</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
+              <SidebarMenuItem className={currentPath === "/editor" ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to="/editor" className="flex items-center gap-3">
                     <Pen size={18} />
@@ -126,7 +129,7 @@ export function DashboardSidebar() {
                   </RouterLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem>
+              <SidebarMenuItem className={currentPath === "/seo" ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to="/seo" className="flex items-center gap-3">
                     <Search size={18} />
@@ -134,7 +137,7 @@ export function DashboardSidebar() {
                   </RouterLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem>
+              <SidebarMenuItem className={currentPath === "/fact-check" ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to="/fact-check" className="flex items-center gap-3">
                     <FileText size={18} />
@@ -142,7 +145,7 @@ export function DashboardSidebar() {
                   </RouterLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem>
+              <SidebarMenuItem className={currentPath === "/approval" ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to="/approval" className="flex items-center gap-3">
                     <Check size={18} />
@@ -157,7 +160,7 @@ export function DashboardSidebar() {
       
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
+          <SidebarMenuItem className={currentPath === "/settings" ? "bg-sidebar-accent/60" : ""}>
             <SidebarMenuButton asChild>
               <RouterLink to="/settings" className="flex items-center gap-3">
                 <Settings size={18} />

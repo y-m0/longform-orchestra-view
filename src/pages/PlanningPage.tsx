@@ -1,11 +1,10 @@
-
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
-import { Calendar, Clock, DollarSign, BarChart2, Users, ArrowRight } from "lucide-react";
+import { Calendar, Clock, DollarSign, BarChart2, Users, ArrowRight, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 

@@ -1,4 +1,3 @@
-
 import {
   Sidebar,
   SidebarContent,
@@ -14,17 +13,11 @@ import {
 import {
   LayoutDashboard,
   FileText,
-  Video,
-  Image,
-  Calendar,
-  Clock,
-  Users,
   Settings,
   ChevronLeft,
   BarChart2,
   Link as LinkIcon,
   ShieldCheck,
-  ListOrdered,
   Pen,
   Search,
   Check,
@@ -61,26 +54,6 @@ export function DashboardSidebar() {
       icon: FileText,
     },
     {
-      title: "Planning",
-      path: "/planning",
-      icon: Calendar,
-    },
-    {
-      title: "Agents",
-      path: "/agents",
-      icon: Users,
-    },
-    {
-      title: "Workflows",
-      path: "/workflows",
-      icon: Clock,
-    },
-    {
-      title: "Series & Themes",
-      path: "/series",
-      icon: ListOrdered,
-    },
-    {
       title: "Analytics",
       path: "/analytics",
       icon: BarChart2,
@@ -89,16 +62,6 @@ export function DashboardSidebar() {
       title: "Publishing",
       path: "/publishing",
       icon: LinkIcon,
-    },
-    {
-      title: "Quality & Compliance",
-      path: "/compliance",
-      icon: ShieldCheck,
-    },
-    {
-      title: "Media Assets",
-      path: "/assets",
-      icon: Image,
     },
   ];
 

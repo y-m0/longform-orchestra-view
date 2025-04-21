@@ -3,9 +3,11 @@ import { StatsCards } from "@/components/StatsCards";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Clock, Plus, Filter } from "lucide-react";
-import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { DashboardHeader } from "@/components/DashboardHeader";
+import { 
+  SidebarProvider 
+} from "@/components/ui/sidebar";
 
 const ScriptsPage = () => {
   // Sample script data

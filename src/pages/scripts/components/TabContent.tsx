@@ -1,10 +1,8 @@
-
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { LinkIcon } from "lucide-react";
+import { LinkIcon, Filter, Users } from "lucide-react";
 import { ScriptsOverviewCards } from "./ScriptsOverviewCards";
 import { ScriptsList } from "./ScriptsList";
 import { Button } from "@/components/ui/button";
-import { Filter } from "lucide-react";
 
 interface TabContentProps {
   activeTab: string;

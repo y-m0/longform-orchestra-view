@@ -21,7 +21,7 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
         <ScriptsOverviewCards />
         <div className="rounded-lg border bg-card shadow-sm">
           <div className="flex items-center justify-between border-b p-4">
-            <h2 className="font-semibold">Recent Articles</h2>
+            <h2 className="font-semibold">Recent Campaigns</h2>
             <Button variant="outline" size="sm" className="flex items-center gap-1">
               <Filter size={14} />
               <span>Filter</span>
@@ -37,7 +37,7 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
     return (
       <Card className="mt-4">
         <CardHeader>
-          <CardTitle>Content Calendar</CardTitle>
+          <CardTitle>Campaign Calendar</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
@@ -47,7 +47,7 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
                 <div className="grid gap-2">
                   {[1, 2].map((task) => (
                     <div key={task} className="flex items-center justify-between rounded-md bg-muted p-2">
-                      <span className="text-sm">Content Task {task}</span>
+                      <span className="text-sm">Campaign Task {task}</span>
                       <Badge variant="outline">Scheduled</Badge>
                     </div>
                   ))}
@@ -64,11 +64,11 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
     return (
       <Card className="mt-4">
         <CardHeader>
-          <CardTitle>Agent Directory</CardTitle>
+          <CardTitle>Creative Team Directory</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {["Writer", "Editor", "SEO Specialist", "Fact-Checker"].map((agent) => (
+            {["Creative Director", "Content Strategist", "SEO Specialist", "Media Buyer"].map((agent) => (
               <div key={agent} className="rounded-lg border p-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20">
@@ -76,11 +76,11 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
                   </div>
                   <div>
                     <div className="font-medium">{agent}</div>
-                    <div className="text-xs text-muted-foreground">AI Assistant</div>
+                    <div className="text-xs text-muted-foreground">Creative Specialist</div>
                   </div>
                 </div>
                 <div className="mt-4 text-sm text-muted-foreground">
-                  Specializes in content {agent.toLowerCase()} tasks within the editorial workflow
+                  Specializes in {agent.toLowerCase()} tasks within the campaign workflow
                 </div>
               </div>
             ))}
@@ -103,17 +103,17 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
     return (
       <Card className="mt-4">
         <CardHeader>
-          <CardTitle>Editorial Workflows</CardTitle>
+          <CardTitle>Campaign Workflows</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            {["Draft", "Review", "Edit", "Publish"].map((stage) => (
+            {["Concept", "Creative", "Review", "Launch"].map((stage) => (
               <div key={stage} className="rounded-lg border p-4">
                 <h3 className="mb-3 font-medium">{stage} Stage</h3>
                 <div className="space-y-2">
                   {[1, 2].map((item) => (
                     <div key={item} className="flex items-center justify-between rounded-md bg-muted p-2">
-                      <span className="text-sm">Article {item}</span>
+                      <span className="text-sm">Campaign {item}</span>
                       <span className="text-xs text-muted-foreground">2 days left</span>
                     </div>
                   ))}
@@ -130,7 +130,7 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
     return (
       <Card className="mt-4">
         <CardHeader>
-          <CardTitle>Publishing Integrations</CardTitle>
+          <CardTitle>Media Distribution Channels</CardTitle>
         </CardHeader>
         <CardContent>
           <PublishingPlatforms />

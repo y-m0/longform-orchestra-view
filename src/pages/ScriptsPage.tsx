@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Plus, FileText, Calendar, Users, Clock, BarChart2, Link as LinkIcon } from "lucide-react";
 import { DashboardSidebar } from "@/components/DashboardSidebar";
@@ -26,51 +27,51 @@ const ScriptsPage = () => {
   
   const [activeTab, setActiveTab] = useState(() => getTabFromUrl());
 
-  // Sample script data
+  // Sample campaign data
   const scripts = [
     {
       id: 1,
-      title: "The Hidden Valley - Final Draft",
+      title: "Tech Product Launch - Q3 Campaign",
       status: "Approved",
       lastModified: "2 days ago",
       author: "Emma Johnson",
       pages: 86,
-      workflow: "Publishing",
+      workflow: "Ready for Launch",
       progress: 90,
-      agents: ["Writer", "Editor", "SEO"]
+      agents: ["Creative Director", "Copywriter", "Designer"]
     },
     {
       id: 2,
-      title: "Eternal Echoes - Episode 4",
+      title: "Summer Fashion Collection - Social Media",
       status: "In Review",
       lastModified: "Yesterday",
       author: "Marcus Chen",
       pages: 42,
-      workflow: "Editing",
+      workflow: "Creative Development",
       progress: 65,
-      agents: ["Writer", "Fact-Checker"]
+      agents: ["Copywriter", "Social Media Manager"]
     },
     {
       id: 3,
-      title: "Beyond the Horizon - Director's Notes",
+      title: "Financial App Redesign - Brand Guidelines",
       status: "Draft",
       lastModified: "5 hours ago",
       author: "Sofia Rodriguez",
       pages: 104,
-      workflow: "Drafting",
+      workflow: "Concept Stage",
       progress: 35,
-      agents: ["Writer"]
+      agents: ["Brand Strategist"]
     },
     {
       id: 4,
-      title: "Urban Legends - Pilot Episode",
+      title: "Lifestyle Brand - Cross-Platform Campaign",
       status: "Needs Revision",
       lastModified: "1 week ago",
       author: "James Wilson",
       pages: 38,
       workflow: "Review",
       progress: 50,
-      agents: ["Editor", "Fact-Checker"]
+      agents: ["Creative Director", "Media Planner"]
     },
   ];
 
@@ -109,14 +110,14 @@ const ScriptsPage = () => {
           <div className="flex-1 space-y-6 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold">Long-Form Media</h1>
+                <h1 className="text-3xl font-bold">Campaign Management</h1>
                 <p className="text-sm text-muted-foreground">
-                  Manage and orchestrate your long-form content creation workflow
+                  Create, manage and track your multi-channel advertising campaigns
                 </p>
               </div>
               <Button className="flex items-center gap-1">
                 <Plus size={16} />
-                <span>New Article</span>
+                <span>New Campaign</span>
               </Button>
             </div>
             
@@ -124,7 +125,7 @@ const ScriptsPage = () => {
               <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="content" className="flex items-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">
                   <FileText size={14} />
-                  <span>Content</span>
+                  <span>Campaigns</span>
                 </TabsTrigger>
                 <TabsTrigger value="planning" className="flex items-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">
                   <Calendar size={14} />
@@ -132,11 +133,11 @@ const ScriptsPage = () => {
                 </TabsTrigger>
                 <TabsTrigger value="agents" className="flex items-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">
                   <Users size={14} />
-                  <span>Agents</span>
+                  <span>Team</span>
                 </TabsTrigger>
                 <TabsTrigger value="workflow" className="flex items-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">
                   <Clock size={14} />
-                  <span>Workflows</span>
+                  <span>Workflow</span>
                 </TabsTrigger>
                 <TabsTrigger value="analytics" className="flex items-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">
                   <BarChart2 size={14} />
@@ -144,7 +145,7 @@ const ScriptsPage = () => {
                 </TabsTrigger>
                 <TabsTrigger value="publish" className="flex items-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">
                   <LinkIcon size={14} />
-                  <span>Publishing</span>
+                  <span>Distribution</span>
                 </TabsTrigger>
               </TabsList>
               

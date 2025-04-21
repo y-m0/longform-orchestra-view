@@ -31,7 +31,7 @@ export const ScriptsList = ({ scripts }: ScriptsListProps) => {
             <div className="flex-1">
               <div className="font-medium">{script.title}</div>
               <div className="text-xs text-muted-foreground">
-                {script.author} · {script.pages} pages
+                {script.author} · {script.pages} assets
               </div>
               <div className="mt-2">
                 <Progress value={script.progress} className="h-1.5 w-full" />

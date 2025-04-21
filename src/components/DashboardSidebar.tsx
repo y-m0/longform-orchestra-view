@@ -32,8 +32,8 @@ export function DashboardSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex items-center gap-2 px-6 py-4 text-xl font-bold">
-          <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
-            Media Nexus
+          <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            AdCraft Studio
           </span>
         </div>
       </SidebarHeader>

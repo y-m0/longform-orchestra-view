@@ -62,9 +62,9 @@ const Index = () => {
           <main className="flex-1 overflow-auto p-6">
             <div className="flex items-center justify-between pb-6">
               <div>
-                <h2 className="text-3xl font-bold">Media Dashboard</h2>
+                <h2 className="text-3xl font-bold">Agency Dashboard</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Manage your long-form media projects and assets in one place
+                  Manage your creative campaigns, clients, and media assets in one place
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ const Index = () => {
 
               <div>
                 <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-lg font-medium">Current Projects</h3>
+                  <h3 className="text-lg font-medium">Active Campaigns</h3>
                   <Tabs value={activeTab} onValueChange={handleTabChange} className="w-[400px]">
                     <TabsList className="grid w-full grid-cols-4">
                       <TabsTrigger value="all" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">All</TabsTrigger>
@@ -101,10 +101,10 @@ const Index = () => {
                       </div>
                       <div className="flex-1">
                         <div className="font-medium">
-                          {i === 1 ? "Script Review" : i === 2 ? "Rough Cut Due" : "Final VFX Delivery"}
+                          {i === 1 ? "Concept Review" : i === 2 ? "Client Presentation" : "Final Asset Delivery"}
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          {i === 1 ? "The Hidden Valley Documentary" : i === 2 ? "Eternal Echoes Series" : "Beyond the Horizon"}
+                          {i === 1 ? "AeroTech Digital Campaign" : i === 2 ? "Lifestyle Brand Refresh" : "Finance App Launch"}
                         </div>
                       </div>
                       <div className="text-sm text-muted-foreground">
@@ -120,6 +120,6 @@ const Index = () => {
       </div>
     </SidebarProvider>
   );
-};
+}
 
 export default Index;

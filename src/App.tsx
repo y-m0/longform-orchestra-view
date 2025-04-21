@@ -15,6 +15,10 @@ import SettingsPage from "./pages/SettingsPage";
 import EditorPage from "./pages/EditorPage";
 import SeoPage from "./pages/SeoPage";
 import ApprovalPage from "./pages/ApprovalPage";
+import ClientsPage from "./pages/ClientsPage";
+import AssetsPage from "./pages/AssetsPage";
+import BriefsPage from "./pages/BriefsPage";
+import PlanningPage from "./pages/PlanningPage";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +39,10 @@ const App = () => (
             <Route path="/editor" element={<EditorPage />} />
             <Route path="/seo" element={<SeoPage />} />
             <Route path="/approval" element={<ApprovalPage />} />
+            <Route path="/clients" element={<ClientsPage />} />
+            <Route path="/assets" element={<AssetsPage />} />
+            <Route path="/briefs" element={<BriefsPage />} />
+            <Route path="/planning" element={<PlanningPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

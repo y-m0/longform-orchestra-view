@@ -1,5 +1,5 @@
 
-import { menuItems, editorialTools } from "@/config/sidebarConfig";
+import { menuItems, creativeTools } from "@/config/sidebarConfig";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -18,7 +18,7 @@ export function SidebarMenuItems({ isActiveRoute }: SidebarMenuItemsProps) {
   return (
     <>
       <SidebarGroup>
-        <SidebarGroupLabel>Media Intelligence</SidebarGroupLabel>
+        <SidebarGroupLabel>Studio Dashboard</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {menuItems.map((item) => (
@@ -36,10 +36,10 @@ export function SidebarMenuItems({ isActiveRoute }: SidebarMenuItemsProps) {
       </SidebarGroup>
       
       <SidebarGroup>
-        <SidebarGroupLabel>Editorial Tools</SidebarGroupLabel>
+        <SidebarGroupLabel>Creative Toolkit</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {editorialTools.map((item) => (
+            {creativeTools.map((item) => (
               <SidebarMenuItem key={item.title} className={isActiveRoute(item.path) ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to={item.path} className="flex items-center gap-3">

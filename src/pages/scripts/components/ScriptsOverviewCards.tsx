@@ -7,7 +7,7 @@ export const ScriptsOverviewCards = () => {
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium">Total Articles</CardTitle>
+          <CardTitle className="text-sm font-medium">Total Campaigns</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-baseline justify-between">
@@ -22,7 +22,7 @@ export const ScriptsOverviewCards = () => {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium">Pending Review</CardTitle>
+          <CardTitle className="text-sm font-medium">Pending Approval</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-baseline justify-between">
@@ -36,11 +36,11 @@ export const ScriptsOverviewCards = () => {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium">Total Pages</CardTitle>
+          <CardTitle className="text-sm font-medium">Active Channels</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-baseline justify-between">
-            <span className="text-3xl font-bold">482</span>
+            <span className="text-3xl font-bold">8</span>
             <FileText size={16} className="text-muted-foreground" />
           </div>
         </CardContent>

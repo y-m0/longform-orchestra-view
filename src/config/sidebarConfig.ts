@@ -7,6 +7,10 @@ import {
   Pen,
   Search,
   Check,
+  Users,
+  Image,
+  Calendar,
+  Folder,
 } from "lucide-react";
 
 export const menuItems = [
@@ -16,7 +20,7 @@ export const menuItems = [
     icon: LayoutDashboard,
   },
   {
-    title: "Content",
+    title: "Campaigns",
     path: "/scripts",
     icon: FileText,
   },
@@ -26,15 +30,25 @@ export const menuItems = [
     icon: BarChart2,
   },
   {
-    title: "Publishing",
+    title: "Media Distribution",
     path: "/publishing",
     icon: LinkIcon,
   },
+  {
+    title: "Clients",
+    path: "/clients",
+    icon: Users,
+  },
+  {
+    title: "Asset Library",
+    path: "/assets",
+    icon: Image,
+  },
 ];
 
-export const editorialTools = [
+export const creativeTools = [
   {
-    title: "Writer",
+    title: "Creator Studio",
     path: "/editor",
     icon: Pen,
   },
@@ -49,8 +63,18 @@ export const editorialTools = [
     icon: FileText,
   },
   {
-    title: "Approval",
+    title: "Campaign Approval",
     path: "/approval",
     icon: Check,
+  },
+  {
+    title: "Brief Templates",
+    path: "/briefs",
+    icon: Folder,
+  },
+  {
+    title: "Media Planning",
+    path: "/planning",
+    icon: Calendar,
   },
 ];

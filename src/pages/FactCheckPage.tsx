@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -228,11 +227,7 @@ const FactCheckPage = () => {
                             <div className="flex items-center gap-2">
                               <Progress 
                                 value={check.accuracy} 
-                                className="h-2 w-full" 
-                                indicatorClassName={
-                                  check.accuracy > 80 ? "bg-green-500" : 
-                                  check.accuracy > 60 ? "bg-amber-500" : "bg-red-500"
-                                }
+                                className="h-1.5 w-full"
                               />
                               <span className="text-sm font-medium">{check.accuracy}%</span>
                             </div>

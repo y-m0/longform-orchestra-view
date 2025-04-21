@@ -1,4 +1,4 @@
-
+import React, { useState } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle, AlertCircle, Search, FileText, Link, ExternalLink } from "lucide-react";
-import { useState } from "react";
 
 export default function FactCheckPage() {
   const [activeTab, setActiveTab] = useState("checker");
@@ -72,158 +71,158 @@ export default function FactCheckPage() {
               <TabsTrigger value="guidelines">Guidelines</TabsTrigger>
               <TabsTrigger value="verified">Verified Claims</TabsTrigger>
             </TabsList>
-          </Tabs>
 
-          <TabsContent value="checker" className="mt-0">
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle>Claim Verification</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex flex-col space-y-2">
-                    <label htmlFor="claim" className="text-sm font-medium">Campaign Claim</label>
-                    <textarea
-                      id="claim"
-                      className="min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm"
-                      placeholder="Enter the claim you want to verify..."
-                    />
-                  </div>
-
-                  <div className="flex flex-col space-y-2">
-                    <label htmlFor="source" className="text-sm font-medium">Source</label>
-                    <Input id="source" placeholder="Reference source for this claim" />
-                  </div>
-
-                  <div className="flex flex-col space-y-2">
-                    <label htmlFor="campaign" className="text-sm font-medium">Related Campaign</label>
-                    <Input id="campaign" placeholder="Select related campaign" />
-                  </div>
-
-                  <div className="flex justify-end space-x-2">
-                    <Button variant="outline">Save Draft</Button>
-                    <Button>Verify Claim</Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Claims</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentClaims.map((claim) => (
-                    <div key={claim.id} className="flex justify-between items-start rounded-lg border p-4">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          {claim.status === "verified" ? (
-                            <CheckCircle className="h-4 w-4 text-green-500" />
-                          ) : claim.status === "flagged" ? (
-                            <AlertCircle className="h-4 w-4 text-red-500" />
-                          ) : (
-                            <Search className="h-4 w-4 text-amber-500" />
-                          )}
-                          <span className="font-medium">{claim.claim}</span>
-                          <Badge variant={
-                            claim.status === "verified" ? "outline" : 
-                            claim.status === "flagged" ? "destructive" : 
-                            "secondary"
-                          }>
-                            {claim.status === "verified" ? "Verified" : 
-                             claim.status === "flagged" ? "Flagged" : 
-                             "Unverified"}
-                          </Badge>
-                        </div>
-                        <div className="text-sm text-muted-foreground">Campaign: {claim.campaign}</div>
-                        <div className="text-sm text-muted-foreground">Source: {claim.source}</div>
-                        <div className="text-sm italic mt-2">{claim.notes}</div>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        Review
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="guidelines" className="mt-0">
-            <Card>
-              <CardHeader>
-                <CardTitle>Fact-checking Guidelines</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <p className="text-muted-foreground">
-                    Follow these guidelines to ensure all campaign claims are accurate, verifiable, and compliant with industry standards.
-                  </p>
-                  
+            <TabsContent value="checker">
+              <Card className="mb-8">
+                <CardHeader>
+                  <CardTitle>Claim Verification</CardTitle>
+                </CardHeader>
+                <CardContent>
                   <div className="space-y-4">
-                    {guidelines.map((guideline, index) => (
-                      <div key={index} className="flex items-start gap-3 rounded-lg border p-4">
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border bg-background">
-                          <span className="text-sm">{index + 1}</span>
+                    <div className="flex flex-col space-y-2">
+                      <label htmlFor="claim" className="text-sm font-medium">Campaign Claim</label>
+                      <textarea
+                        id="claim"
+                        className="min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        placeholder="Enter the claim you want to verify..."
+                      />
+                    </div>
+
+                    <div className="flex flex-col space-y-2">
+                      <label htmlFor="source" className="text-sm font-medium">Source</label>
+                      <Input id="source" placeholder="Reference source for this claim" />
+                    </div>
+
+                    <div className="flex flex-col space-y-2">
+                      <label htmlFor="campaign" className="text-sm font-medium">Related Campaign</label>
+                      <Input id="campaign" placeholder="Select related campaign" />
+                    </div>
+
+                    <div className="flex justify-end space-x-2">
+                      <Button variant="outline">Save Draft</Button>
+                      <Button>Verify Claim</Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Recent Claims</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {recentClaims.map((claim) => (
+                      <div key={claim.id} className="flex justify-between items-start rounded-lg border p-4">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            {claim.status === "verified" ? (
+                              <CheckCircle className="h-4 w-4 text-green-500" />
+                            ) : claim.status === "flagged" ? (
+                              <AlertCircle className="h-4 w-4 text-red-500" />
+                            ) : (
+                              <Search className="h-4 w-4 text-amber-500" />
+                            )}
+                            <span className="font-medium">{claim.claim}</span>
+                            <Badge variant={
+                              claim.status === "verified" ? "outline" : 
+                              claim.status === "flagged" ? "destructive" : 
+                              "secondary"
+                            }>
+                              {claim.status === "verified" ? "Verified" : 
+                               claim.status === "flagged" ? "Flagged" : 
+                               "Unverified"}
+                            </Badge>
+                          </div>
+                          <div className="text-sm text-muted-foreground">Campaign: {claim.campaign}</div>
+                          <div className="text-sm text-muted-foreground">Source: {claim.source}</div>
+                          <div className="text-sm italic mt-2">{claim.notes}</div>
                         </div>
-                        <p>{guideline}</p>
+                        <Button variant="outline" size="sm">
+                          Review
+                        </Button>
                       </div>
                     ))}
                   </div>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full">Download Complete Guidelines</Button>
-              </CardFooter>
-            </Card>
-          </TabsContent>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-          <TabsContent value="verified" className="mt-0">
-            <Card>
-              <CardHeader>
-                <CardTitle>Verified Claim Library</CardTitle>
-                <div className="relative mt-2">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search verified claims..." className="pl-8 w-full" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="rounded-md border">
-                  <div className="grid grid-cols-5 p-4 border-b font-medium">
-                    <div className="col-span-2">Claim</div>
-                    <div>Campaign</div>
-                    <div>Source</div>
-                    <div className="text-right">Actions</div>
-                  </div>
-                  <div className="divide-y">
-                    {recentClaims
-                      .filter(claim => claim.status === "verified")
-                      .map((claim) => (
-                        <div key={claim.id} className="grid grid-cols-5 p-4 items-center">
-                          <div className="col-span-2 flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-500" />
-                            <span>{claim.claim}</span>
+            <TabsContent value="guidelines">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Fact-checking Guidelines</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <p className="text-muted-foreground">
+                      Follow these guidelines to ensure all campaign claims are accurate, verifiable, and compliant with industry standards.
+                    </p>
+                    
+                    <div className="space-y-4">
+                      {guidelines.map((guideline, index) => (
+                        <div key={index} className="flex items-start gap-3 rounded-lg border p-4">
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border bg-background">
+                            <span className="text-sm">{index + 1}</span>
                           </div>
-                          <div>{claim.campaign}</div>
-                          <div className="text-sm">{claim.source}</div>
-                          <div className="flex justify-end gap-2">
-                            <Button variant="outline" size="sm" className="flex items-center gap-1">
-                              <Link className="h-3 w-3" />
-                              <span>Use</span>
-                            </Button>
-                            <Button size="sm" className="flex items-center gap-1">
-                              <ExternalLink className="h-3 w-3" />
-                              <span>View</span>
-                            </Button>
-                          </div>
+                          <p>{guideline}</p>
                         </div>
                       ))}
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full">Download Complete Guidelines</Button>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="verified">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Verified Claim Library</CardTitle>
+                  <div className="relative mt-2">
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Input placeholder="Search verified claims..." className="pl-8 w-full" />
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="rounded-md border">
+                    <div className="grid grid-cols-5 p-4 border-b font-medium">
+                      <div className="col-span-2">Claim</div>
+                      <div>Campaign</div>
+                      <div>Source</div>
+                      <div className="text-right">Actions</div>
+                    </div>
+                    <div className="divide-y">
+                      {recentClaims
+                        .filter(claim => claim.status === "verified")
+                        .map((claim) => (
+                          <div key={claim.id} className="grid grid-cols-5 p-4 items-center">
+                            <div className="col-span-2 flex items-center gap-2">
+                              <CheckCircle className="h-4 w-4 text-green-500" />
+                              <span>{claim.claim}</span>
+                            </div>
+                            <div>{claim.campaign}</div>
+                            <div className="text-sm">{claim.source}</div>
+                            <div className="flex justify-end gap-2">
+                              <Button variant="outline" size="sm" className="flex items-center gap-1">
+                                <Link className="h-3 w-3" />
+                                <span>Use</span>
+                              </Button>
+                              <Button size="sm" className="flex items-center gap-1">
+                                <ExternalLink className="h-3 w-3" />
+                                <span>View</span>
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </main>
       </div>
     </SidebarProvider>

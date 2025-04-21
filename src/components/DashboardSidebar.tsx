@@ -22,7 +22,7 @@ import {
   Settings,
   ChevronLeft,
   BarChart2,
-  Link,
+  Link as LinkIcon,
   ShieldCheck,
   ListOrdered,
   Pen,
@@ -33,7 +33,21 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 
 export function DashboardSidebar() {
   const location = useLocation();
-  const currentPath = location.pathname;
+  
+  // Function to check if route is active (includes URL parameters)
+  const isActiveRoute = (path: string) => {
+    // Exact match (for root path)
+    if (path === '/' && location.pathname === '/') {
+      return true;
+    }
+    
+    // Partial match (for sub-paths)
+    if (path !== '/' && location.pathname.startsWith(path)) {
+      return true;
+    }
+    
+    return false;
+  };
 
   const menuItems = [
     {
@@ -74,7 +88,7 @@ export function DashboardSidebar() {
     {
       title: "Publishing",
       path: "/publishing",
-      icon: Link,
+      icon: LinkIcon,
     },
     {
       title: "Quality & Compliance",
@@ -104,7 +118,7 @@ export function DashboardSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title} className={currentPath === item.path ? "bg-sidebar-accent/60" : ""}>
+                <SidebarMenuItem key={item.title} className={isActiveRoute(item.path) ? "bg-sidebar-accent/60" : ""}>
                   <SidebarMenuButton asChild>
                     <RouterLink to={item.path} className="flex items-center gap-3">
                       <item.icon size={18} />
@@ -121,7 +135,7 @@ export function DashboardSidebar() {
           <SidebarGroupLabel>Editorial Tools</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem className={currentPath === "/editor" ? "bg-sidebar-accent/60" : ""}>
+              <SidebarMenuItem className={isActiveRoute("/editor") ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to="/editor" className="flex items-center gap-3">
                     <Pen size={18} />
@@ -129,7 +143,7 @@ export function DashboardSidebar() {
                   </RouterLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem className={currentPath === "/seo" ? "bg-sidebar-accent/60" : ""}>
+              <SidebarMenuItem className={isActiveRoute("/seo") ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to="/seo" className="flex items-center gap-3">
                     <Search size={18} />
@@ -137,7 +151,7 @@ export function DashboardSidebar() {
                   </RouterLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem className={currentPath === "/fact-check" ? "bg-sidebar-accent/60" : ""}>
+              <SidebarMenuItem className={isActiveRoute("/fact-check") ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to="/fact-check" className="flex items-center gap-3">
                     <FileText size={18} />
@@ -145,7 +159,7 @@ export function DashboardSidebar() {
                   </RouterLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem className={currentPath === "/approval" ? "bg-sidebar-accent/60" : ""}>
+              <SidebarMenuItem className={isActiveRoute("/approval") ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to="/approval" className="flex items-center gap-3">
                     <Check size={18} />
@@ -160,7 +174,7 @@ export function DashboardSidebar() {
       
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem className={currentPath === "/settings" ? "bg-sidebar-accent/60" : ""}>
+          <SidebarMenuItem className={isActiveRoute("/settings") ? "bg-sidebar-accent/60" : ""}>
             <SidebarMenuButton asChild>
               <RouterLink to="/settings" className="flex items-center gap-3">
                 <Settings size={18} />

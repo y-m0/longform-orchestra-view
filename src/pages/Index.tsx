@@ -6,11 +6,56 @@ import { StatsCards } from "@/components/StatsCards";
 import { MediaCards } from "@/components/MediaCards";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Default tab is 'all'
+  const defaultTab = "all";
+  
+  // Extract tab from URL search params
+  const getTabFromUrl = () => {
+    const searchParams = new URLSearchParams(location.search);
+    const tab = searchParams.get("tab");
+    return tab && ["all", "production", "post", "pre"].includes(tab) 
+      ? tab 
+      : defaultTab;
+  };
+  
+  const [activeTab, setActiveTab] = useState(() => getTabFromUrl());
+
+  // Update URL when tab changes
+  useEffect(() => {
+    const currentTab = getTabFromUrl();
+    if (currentTab !== activeTab) {
+      const newSearchParams = new URLSearchParams(location.search);
+      newSearchParams.set("tab", activeTab);
+      navigate(`${location.pathname}?${newSearchParams.toString()}`, { replace: true });
+    }
+  }, [activeTab, location.search, navigate, location.pathname]);
+
+  // Update tab state when URL changes
+  useEffect(() => {
+    const tabFromUrl = getTabFromUrl();
+    if (tabFromUrl !== activeTab) {
+      setActiveTab(tabFromUrl);
+    }
+  }, [location.search]);
+
+  // Handle tab change
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    const newSearchParams = new URLSearchParams(location.search);
+    newSearchParams.set("tab", value);
+    navigate(`${location.pathname}?${newSearchParams.toString()}`);
+  };
+
   return (
     <SidebarProvider>
-      <div className="flex h-screen w-full overflow-hidden bg-slate-50">
+      <div className="flex h-screen w-full overflow-hidden bg-slate-50 dark:bg-background">
         <DashboardSidebar />
         <div className="flex flex-1 flex-col overflow-auto">
           <DashboardHeader />
@@ -33,12 +78,12 @@ const Index = () => {
               <div>
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="text-lg font-medium">Current Projects</h3>
-                  <Tabs defaultValue="all" className="w-[400px]">
+                  <Tabs value={activeTab} onValueChange={handleTabChange} className="w-[400px]">
                     <TabsList className="grid w-full grid-cols-4">
-                      <TabsTrigger value="all">All</TabsTrigger>
-                      <TabsTrigger value="production">Production</TabsTrigger>
-                      <TabsTrigger value="post">Post</TabsTrigger>
-                      <TabsTrigger value="pre">Pre-Production</TabsTrigger>
+                      <TabsTrigger value="all" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">All</TabsTrigger>
+                      <TabsTrigger value="production" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">Production</TabsTrigger>
+                      <TabsTrigger value="post" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">Post</TabsTrigger>
+                      <TabsTrigger value="pre" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">Pre-Production</TabsTrigger>
                     </TabsList>
                   </Tabs>
                 </div>
@@ -51,7 +96,7 @@ const Index = () => {
                 <div className="space-y-4">
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="flex items-center gap-4 rounded-md border p-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-md bg-purple-100 text-purple-700">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-md bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">
                         <span className="font-medium">{i + 14}</span>
                       </div>
                       <div className="flex-1">

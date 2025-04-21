@@ -14,7 +14,7 @@ import PlanningPage from "./pages/PlanningPage";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <ThemeProvider defaultTheme="light" storageKey="ui-theme">
+  <ThemeProvider defaultTheme="system" storageKey="ui-theme">
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />

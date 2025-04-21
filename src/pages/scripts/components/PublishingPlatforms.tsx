@@ -26,7 +26,7 @@ export const PublishingPlatforms = () => {
                 <div className="flex items-center gap-2">
                   {platform.status === "connected" ? (
                     <>
-                      <Badge variant="success" className="bg-green-500">
+                      <Badge variant="success">
                         <Check size={12} className="mr-1" />
                         Connected
                       </Badge>

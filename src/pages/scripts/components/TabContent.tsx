@@ -1,8 +1,10 @@
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Filter, Users } from "lucide-react";
 import { ScriptsOverviewCards } from "./ScriptsOverviewCards";
 import { ScriptsList } from "./ScriptsList";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ContentPerformanceChart } from "./ContentPerformanceChart";
 import { WorkflowEfficiencyChart } from "./WorkflowEfficiencyChart";
 import { PublishingPlatforms } from "./PublishingPlatforms";

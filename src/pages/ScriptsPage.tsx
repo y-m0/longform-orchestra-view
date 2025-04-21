@@ -1,26 +1,12 @@
-import { StatsCards } from "@/components/StatsCards";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Clock, Plus, Filter, Calendar, BarChart2, Users, Link as LinkIcon, ShieldCheck } from "lucide-react";
+import { Plus, FileText, Calendar, Users, Clock, BarChart2, Link as LinkIcon } from "lucide-react";
 import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { DashboardHeader } from "@/components/DashboardHeader";
-import { 
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider 
-} from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { TabContent } from "./scripts/components/TabContent";
 
 const ScriptsPage = () => {
   const navigate = useNavigate();
@@ -39,32 +25,6 @@ const ScriptsPage = () => {
   };
   
   const [activeTab, setActiveTab] = useState(() => getTabFromUrl());
-
-  // Update URL when tab changes
-  useEffect(() => {
-    const currentTab = getTabFromUrl();
-    if (currentTab !== activeTab) {
-      const newSearchParams = new URLSearchParams(location.search);
-      newSearchParams.set("tab", activeTab);
-      navigate(`${location.pathname}?${newSearchParams.toString()}`, { replace: true });
-    }
-  }, [activeTab, location.search, navigate, location.pathname]);
-
-  // Update tab state when URL changes
-  useEffect(() => {
-    const tabFromUrl = getTabFromUrl();
-    if (tabFromUrl !== activeTab) {
-      setActiveTab(tabFromUrl);
-    }
-  }, [location.search]);
-
-  // Handle tab change
-  const handleTabChange = (value: string) => {
-    setActiveTab(value);
-    const newSearchParams = new URLSearchParams(location.search);
-    newSearchParams.set("tab", value);
-    navigate(`${location.pathname}?${newSearchParams.toString()}`);
-  };
 
   // Sample script data
   const scripts = [
@@ -114,6 +74,32 @@ const ScriptsPage = () => {
     },
   ];
 
+  // Update URL when tab changes
+  useEffect(() => {
+    const currentTab = getTabFromUrl();
+    if (currentTab !== activeTab) {
+      const newSearchParams = new URLSearchParams(location.search);
+      newSearchParams.set("tab", activeTab);
+      navigate(`${location.pathname}?${newSearchParams.toString()}`, { replace: true });
+    }
+  }, [activeTab, location.search, navigate, location.pathname]);
+
+  // Update tab state when URL changes
+  useEffect(() => {
+    const tabFromUrl = getTabFromUrl();
+    if (tabFromUrl !== activeTab) {
+      setActiveTab(tabFromUrl);
+    }
+  }, [location.search]);
+
+  // Handle tab change
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    const newSearchParams = new URLSearchParams(location.search);
+    newSearchParams.set("tab", value);
+    navigate(`${location.pathname}?${newSearchParams.toString()}`);
+  };
+
   return (
     <SidebarProvider>
       <div className="flex h-screen w-full overflow-hidden bg-slate-50 dark:bg-background">
@@ -134,7 +120,6 @@ const ScriptsPage = () => {
               </Button>
             </div>
             
-            {/* Intelligence Features Navigation */}
             <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
               <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="content" className="flex items-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary/20">
@@ -163,213 +148,7 @@ const ScriptsPage = () => {
                 </TabsTrigger>
               </TabsList>
               
-              {/* Content Tab */}
-              <TabsContent value="content" className="space-y-4 pt-4">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-sm font-medium">Total Articles</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-baseline justify-between">
-                        <span className="text-3xl font-bold">24</span>
-                        <div className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                          <span>+3</span>
-                          <span>this month</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-sm font-medium">Pending Review</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-baseline justify-between">
-                        <span className="text-3xl font-bold">6</span>
-                        <div className="flex items-center text-amber-600 dark:text-amber-400">
-                          <Clock size={14} />
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-sm font-medium">Total Pages</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-baseline justify-between">
-                        <span className="text-3xl font-bold">482</span>
-                        <FileText size={16} className="text-muted-foreground" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <div className="rounded-lg border bg-card shadow-sm">
-                  <div className="flex items-center justify-between border-b p-4">
-                    <h2 className="font-semibold">Recent Articles</h2>
-                    <Button variant="outline" size="sm" className="flex items-center gap-1">
-                      <Filter size={14} />
-                      <span>Filter</span>
-                    </Button>
-                  </div>
-                  <div className="divide-y">
-                    {scripts.map((script) => (
-                      <div key={script.id} className="flex items-center justify-between p-4">
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary/10 text-primary">
-                            <FileText size={18} />
-                          </div>
-                          <div className="flex-1">
-                            <div className="font-medium">{script.title}</div>
-                            <div className="text-xs text-muted-foreground">
-                              {script.author} · {script.pages} pages
-                            </div>
-                            <div className="mt-2">
-                              <Progress value={script.progress} className="h-1.5 w-full" />
-                              <div className="mt-1 flex items-center justify-between text-xs text-muted-foreground">
-                                <span>{script.workflow} ({script.progress}%)</span>
-                                <div className="flex gap-1">
-                                  {script.agents.map((agent) => (
-                                    <span key={agent} className="rounded-full bg-slate-100 px-2 py-0.5 dark:bg-slate-800">
-                                      {agent}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                          <div className="text-sm text-muted-foreground">
-                            Updated {script.lastModified}
-                          </div>
-                          <div
-                            className={`rounded-full px-2.5 py-0.5 text-xs font-medium
-                              ${script.status === "Approved" ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" :
-                              script.status === "In Review" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" :
-                              script.status === "Draft" ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" :
-                              "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"}`}
-                          >
-                            {script.status}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-              
-              {/* Planning Tab */}
-              <TabsContent value="planning" className="pt-4">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Content Calendar</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-center text-sm text-muted-foreground py-8">
-                      Calendar view for editorial planning will appear here
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              {/* Agents Tab */}
-              <TabsContent value="agents" className="pt-4">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Agent Directory</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                      {["Writer", "Editor", "SEO Specialist", "Fact-Checker"].map((agent) => (
-                        <div key={agent} className="rounded-lg border p-4">
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20">
-                              <Users size={16} className="text-primary" />
-                            </div>
-                            <div>
-                              <div className="font-medium">{agent}</div>
-                              <div className="text-xs text-muted-foreground">AI Assistant</div>
-                            </div>
-                          </div>
-                          <div className="mt-4 text-sm text-muted-foreground">
-                            Specializes in content {agent.toLowerCase()} tasks within the editorial workflow
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              {/* Analytics Tab */}
-              <TabsContent value="analytics" className="pt-4">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Content Performance</CardTitle>
-                    </CardHeader>
-                    <CardContent className="h-[300px] flex items-center justify-center">
-                      <div className="text-center text-sm text-muted-foreground">
-                        Performance charts will appear here
-                      </div>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Workflow Efficiency</CardTitle>
-                    </CardHeader>
-                    <CardContent className="h-[300px] flex items-center justify-center">
-                      <div className="text-center text-sm text-muted-foreground">
-                        Workflow metrics charts will appear here
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-              
-              {/* Workflow tab content */}
-              <TabsContent value="workflow" className="pt-4">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Editorial Workflows</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-center text-sm text-muted-foreground py-8">
-                      Workflow management interface will appear here
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="publish" className="pt-4">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Publishing Integrations</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                      {["Substack", "Medium", "WordPress", "Ghost"].map((platform) => (
-                        <div key={platform} className="flex items-center gap-3 rounded-lg border p-4">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-slate-100 dark:bg-slate-800">
-                            <LinkIcon size={18} className="text-slate-600 dark:text-slate-300" />
-                          </div>
-                          <div>
-                            <div className="font-medium">{platform}</div>
-                            <div className="text-xs text-muted-foreground">
-                              Connect to publish articles
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
+              <TabContent activeTab={activeTab} scripts={scripts} />
             </Tabs>
           </div>
         </div>

@@ -1,8 +1,11 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { LinkIcon, Filter, Users } from "lucide-react";
+import { Filter, Users } from "lucide-react";
 import { ScriptsOverviewCards } from "./ScriptsOverviewCards";
 import { ScriptsList } from "./ScriptsList";
 import { Button } from "@/components/ui/button";
+import { ContentPerformanceChart } from "./ContentPerformanceChart";
+import { WorkflowEfficiencyChart } from "./WorkflowEfficiencyChart";
+import { PublishingPlatforms } from "./PublishingPlatforms";
 
 interface TabContentProps {
   activeTab: string;
@@ -35,8 +38,20 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
           <CardTitle>Content Calendar</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center text-sm text-muted-foreground py-8">
-            Calendar view for editorial planning will appear here
+          <div className="grid gap-4">
+            {[1, 2, 3].map((week) => (
+              <div key={week} className="rounded-lg border p-4">
+                <h3 className="mb-3 font-medium">Week {week}</h3>
+                <div className="grid gap-2">
+                  {[1, 2].map((task) => (
+                    <div key={task} className="flex items-center justify-between rounded-md bg-muted p-2">
+                      <span className="text-sm">Content Task {task}</span>
+                      <Badge variant="outline">Scheduled</Badge>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
@@ -76,26 +91,8 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
   if (activeTab === "analytics") {
     return (
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 pt-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Content Performance</CardTitle>
-          </CardHeader>
-          <CardContent className="h-[300px] flex items-center justify-center">
-            <div className="text-center text-sm text-muted-foreground">
-              Performance charts will appear here
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Workflow Efficiency</CardTitle>
-          </CardHeader>
-          <CardContent className="h-[300px] flex items-center justify-center">
-            <div className="text-center text-sm text-muted-foreground">
-              Workflow metrics charts will appear here
-            </div>
-          </CardContent>
-        </Card>
+        <ContentPerformanceChart />
+        <WorkflowEfficiencyChart />
       </div>
     );
   }
@@ -107,8 +104,20 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
           <CardTitle>Editorial Workflows</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center text-sm text-muted-foreground py-8">
-            Workflow management interface will appear here
+          <div className="grid gap-4">
+            {["Draft", "Review", "Edit", "Publish"].map((stage) => (
+              <div key={stage} className="rounded-lg border p-4">
+                <h3 className="mb-3 font-medium">{stage} Stage</h3>
+                <div className="space-y-2">
+                  {[1, 2].map((item) => (
+                    <div key={item} className="flex items-center justify-between rounded-md bg-muted p-2">
+                      <span className="text-sm">Article {item}</span>
+                      <span className="text-xs text-muted-foreground">2 days left</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
@@ -122,21 +131,7 @@ export const TabContent = ({ activeTab, scripts }: TabContentProps) => {
           <CardTitle>Publishing Integrations</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {["Substack", "Medium", "WordPress", "Ghost"].map((platform) => (
-              <div key={platform} className="flex items-center gap-3 rounded-lg border p-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-slate-100 dark:bg-slate-800">
-                  <LinkIcon size={18} className="text-slate-600 dark:text-slate-300" />
-                </div>
-                <div>
-                  <div className="font-medium">{platform}</div>
-                  <div className="text-xs text-muted-foreground">
-                    Connect to publish articles
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <PublishingPlatforms />
         </CardContent>
       </Card>
     );

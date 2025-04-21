@@ -58,9 +58,9 @@ export const creativeTools = [
     icon: Search,
   },
   {
-    title: "Fact Checker",
+    title: "Content Verification",
     path: "/fact-check",
-    icon: FileText,
+    icon: Check,
   },
   {
     title: "Campaign Approval",

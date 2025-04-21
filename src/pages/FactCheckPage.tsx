@@ -1,253 +1,231 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DashboardSidebar } from "@/components/DashboardSidebar";
-import { DashboardHeader } from "@/components/DashboardHeader";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { FileText, CheckCircle, AlertCircle, Search, Clock } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
 
-const FactCheckPage = () => {
-  const [currentText, setCurrentText] = useState("");
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { DashboardSidebar } from "@/components/DashboardSidebar";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CheckCircle, AlertCircle, Search, FileText, Link, ExternalLink } from "lucide-react";
+import { useState } from "react";
+
+export default function FactCheckPage() {
+  const [activeTab, setActiveTab] = useState("checker");
   
-  // Sample data for fact checks
-  const factChecks = [
+  const recentClaims = [
     {
       id: 1,
-      title: "Climate Change Statistics",
-      status: "Verified",
-      lastChecked: "2 days ago",
-      accuracy: 95,
-      sources: 4,
-      excerpt: "Global temperatures have risen by 1.1°C since the pre-industrial era..."
+      claim: "Our product increases efficiency by 85%",
+      campaign: "Tech Product Launch - Q3",
+      source: "Research Study XB-49",
+      status: "verified",
+      notes: "Internal study verified by independent lab"
     },
     {
       id: 2,
-      title: "Economic Growth Projections",
-      status: "Pending",
-      lastChecked: "5 hours ago",
-      accuracy: 0,
-      sources: 2,
-      excerpt: "The annual GDP growth rate is expected to reach 3.5% by the end of..."
+      claim: "#1 in customer satisfaction",
+      campaign: "Summer Collection Launch",
+      source: "Nielsen Consumer Report 2025",
+      status: "unverified",
+      notes: "Need to check which specific category this applies to"
     },
     {
       id: 3,
-      title: "Health Statistics in Report",
-      status: "Issues Found",
-      lastChecked: "Yesterday",
-      accuracy: 72,
-      sources: 6,
-      excerpt: "Vaccine efficacy rates across different demographics show significant..."
+      claim: "Recommended by 9 out of 10 experts",
+      campaign: "Health Product Campaign",
+      source: "Internal survey data",
+      status: "flagged",
+      notes: "Sample size too small, needs additional verification"
     },
+    {
+      id: 4,
+      claim: "30-day money back guarantee",
+      campaign: "E-commerce Relaunch",
+      source: "Company policy",
+      status: "verified",
+      notes: "Confirmed with legal department"
+    }
+  ];
+
+  const guidelines = [
+    "All superlative claims (#1, best, leading, etc.) must be substantiated with sources",
+    "Industry specific regulations must be considered for each vertical",
+    "Performance claims require verification from at least 2 independent sources",
+    "Avoid absolute claims when percentage ranges would be more accurate",
+    "All quoted testimonials must be verified with signed releases",
+    "Environmental claims must conform to FTC Green Guides"
   ];
 
   return (
     <SidebarProvider>
-      <div className="flex h-screen w-full overflow-hidden bg-slate-50">
+      <div className="flex min-h-screen">
         <DashboardSidebar />
-        <div className="flex flex-1 flex-col overflow-auto">
-          <DashboardHeader />
-          <div className="flex-1 space-y-6 p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-3xl font-bold">Fact Checker</h1>
-                <p className="text-sm text-muted-foreground">
-                  Verify claims and sources in your content
-                </p>
-              </div>
-            </div>
-            
-            <Tabs defaultValue="check" className="w-full">
-              <TabsList>
-                <TabsTrigger value="check" className="flex items-center gap-2">
-                  <Search size={14} />
-                  <span>Check Content</span>
-                </TabsTrigger>
-                <TabsTrigger value="history" className="flex items-center gap-2">
-                  <Clock size={14} />
-                  <span>Check History</span>
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="check" className="space-y-4 pt-4">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Submit Content for Verification</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <Textarea 
-                        placeholder="Paste text to fact check..." 
-                        className="min-h-[200px]"
-                        value={currentText}
-                        onChange={(e) => setCurrentText(e.target.value)}
-                      />
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Button className="flex items-center gap-2">
-                        <Search size={16} />
-                        Run Fact Check
-                      </Button>
-                      <span className="text-sm text-muted-foreground">
-                        or
-                      </span>
-                      <Input type="file" className="max-w-[300px]" />
-                    </div>
-                  </CardContent>
-                </Card>
-                
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Verification Options</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                      <div className="rounded-lg border p-4">
-                        <div className="flex items-center gap-2">
-                          <CheckCircle size={18} className="text-green-500" />
-                          <span className="font-medium">Standard Check</span>
-                        </div>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                          Verifies factual claims against trusted sources
-                        </p>
-                      </div>
-                      
-                      <div className="rounded-lg border p-4">
-                        <div className="flex items-center gap-2">
-                          <Search size={18} className="text-blue-500" />
-                          <span className="font-medium">Deep Research</span>
-                        </div>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                          Thorough verification with academic and primary sources
-                        </p>
-                      </div>
-                      
-                      <div className="rounded-lg border p-4">
-                        <div className="flex items-center gap-2">
-                          <AlertCircle size={18} className="text-amber-500" />
-                          <span className="font-medium">Bias Analysis</span>
-                        </div>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                          Identifies potential bias or skewed perspectives
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="history" className="space-y-4 pt-4">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-sm font-medium">Completed Checks</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-baseline justify-between">
-                        <span className="text-3xl font-bold">42</span>
-                        <div className="flex items-center text-green-500">
-                          <CheckCircle size={16} />
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-sm font-medium">Average Accuracy</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-baseline justify-between">
-                        <span className="text-3xl font-bold">86%</span>
-                        <div className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700">
-                          <span>+2%</span>
-                          <span>this month</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-sm font-medium">Sources Checked</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-baseline justify-between">
-                        <span className="text-3xl font-bold">187</span>
-                        <FileText size={16} className="text-muted-foreground" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-                
-                <div className="rounded-lg border bg-card shadow-sm">
-                  <div className="flex items-center justify-between border-b p-4">
-                    <h2 className="font-semibold">Recent Fact Checks</h2>
+        <main className="flex-1 p-8">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold">Fact Checker</h1>
+            <p className="text-muted-foreground">Verify campaign claims and content accuracy before publication</p>
+          </div>
+
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full mb-8">
+            <TabsList className="grid w-full max-w-md grid-cols-3">
+              <TabsTrigger value="checker">Claim Checker</TabsTrigger>
+              <TabsTrigger value="guidelines">Guidelines</TabsTrigger>
+              <TabsTrigger value="verified">Verified Claims</TabsTrigger>
+            </TabsList>
+          </Tabs>
+
+          <TabsContent value="checker" className="mt-0">
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle>Claim Verification</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex flex-col space-y-2">
+                    <label htmlFor="claim" className="text-sm font-medium">Campaign Claim</label>
+                    <textarea
+                      id="claim"
+                      className="min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm"
+                      placeholder="Enter the claim you want to verify..."
+                    />
                   </div>
-                  <div className="divide-y">
-                    {factChecks.map((check) => (
-                      <div key={check.id} className="p-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className={`flex h-10 w-10 items-center justify-center rounded-md 
-                              ${check.status === "Verified" ? "bg-green-100 text-green-600" : 
-                                check.status === "Issues Found" ? "bg-amber-100 text-amber-600" : 
-                                "bg-blue-100 text-blue-600"}`}>
-                              {check.status === "Verified" ? (
-                                <CheckCircle size={18} />
-                              ) : check.status === "Issues Found" ? (
-                                <AlertCircle size={18} />
-                              ) : (
-                                <Clock size={18} />
-                              )}
-                            </div>
-                            <div>
-                              <div className="font-medium">{check.title}</div>
-                              <div className="text-xs text-muted-foreground">
-                                Checked {check.lastChecked} • {check.sources} sources
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className={`rounded-full px-2.5 py-0.5 text-xs font-medium
-                              ${check.status === "Verified" ? "bg-green-100 text-green-700" :
-                              check.status === "Pending" ? "bg-blue-100 text-blue-700" :
-                              "bg-amber-100 text-amber-700"}`}
-                          >
-                            {check.status}
-                          </div>
+
+                  <div className="flex flex-col space-y-2">
+                    <label htmlFor="source" className="text-sm font-medium">Source</label>
+                    <Input id="source" placeholder="Reference source for this claim" />
+                  </div>
+
+                  <div className="flex flex-col space-y-2">
+                    <label htmlFor="campaign" className="text-sm font-medium">Related Campaign</label>
+                    <Input id="campaign" placeholder="Select related campaign" />
+                  </div>
+
+                  <div className="flex justify-end space-x-2">
+                    <Button variant="outline">Save Draft</Button>
+                    <Button>Verify Claim</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Recent Claims</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {recentClaims.map((claim) => (
+                    <div key={claim.id} className="flex justify-between items-start rounded-lg border p-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          {claim.status === "verified" ? (
+                            <CheckCircle className="h-4 w-4 text-green-500" />
+                          ) : claim.status === "flagged" ? (
+                            <AlertCircle className="h-4 w-4 text-red-500" />
+                          ) : (
+                            <Search className="h-4 w-4 text-amber-500" />
+                          )}
+                          <span className="font-medium">{claim.claim}</span>
+                          <Badge variant={
+                            claim.status === "verified" ? "outline" : 
+                            claim.status === "flagged" ? "destructive" : 
+                            "secondary"
+                          }>
+                            {claim.status === "verified" ? "Verified" : 
+                             claim.status === "flagged" ? "Flagged" : 
+                             "Unverified"}
+                          </Badge>
                         </div>
-                        
-                        {check.status !== "Pending" && (
-                          <div className="mt-3">
-                            <div className="mb-1 text-xs text-muted-foreground">Accuracy</div>
-                            <div className="flex items-center gap-2">
-                              <Progress 
-                                value={check.accuracy} 
-                                className="h-1.5 w-full"
-                              />
-                              <span className="text-sm font-medium">{check.accuracy}%</span>
-                            </div>
-                          </div>
-                        )}
-                        
-                        <div className="mt-3 rounded border border-muted p-3 text-sm">
-                          "{check.excerpt}"
+                        <div className="text-sm text-muted-foreground">Campaign: {claim.campaign}</div>
+                        <div className="text-sm text-muted-foreground">Source: {claim.source}</div>
+                        <div className="text-sm italic mt-2">{claim.notes}</div>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        Review
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="guidelines" className="mt-0">
+            <Card>
+              <CardHeader>
+                <CardTitle>Fact-checking Guidelines</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <p className="text-muted-foreground">
+                    Follow these guidelines to ensure all campaign claims are accurate, verifiable, and compliant with industry standards.
+                  </p>
+                  
+                  <div className="space-y-4">
+                    {guidelines.map((guideline, index) => (
+                      <div key={index} className="flex items-start gap-3 rounded-lg border p-4">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border bg-background">
+                          <span className="text-sm">{index + 1}</span>
                         </div>
+                        <p>{guideline}</p>
                       </div>
                     ))}
                   </div>
                 </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </div>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full">Download Complete Guidelines</Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="verified" className="mt-0">
+            <Card>
+              <CardHeader>
+                <CardTitle>Verified Claim Library</CardTitle>
+                <div className="relative mt-2">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="Search verified claims..." className="pl-8 w-full" />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="rounded-md border">
+                  <div className="grid grid-cols-5 p-4 border-b font-medium">
+                    <div className="col-span-2">Claim</div>
+                    <div>Campaign</div>
+                    <div>Source</div>
+                    <div className="text-right">Actions</div>
+                  </div>
+                  <div className="divide-y">
+                    {recentClaims
+                      .filter(claim => claim.status === "verified")
+                      .map((claim) => (
+                        <div key={claim.id} className="grid grid-cols-5 p-4 items-center">
+                          <div className="col-span-2 flex items-center gap-2">
+                            <CheckCircle className="h-4 w-4 text-green-500" />
+                            <span>{claim.claim}</span>
+                          </div>
+                          <div>{claim.campaign}</div>
+                          <div className="text-sm">{claim.source}</div>
+                          <div className="flex justify-end gap-2">
+                            <Button variant="outline" size="sm" className="flex items-center gap-1">
+                              <Link className="h-3 w-3" />
+                              <span>Use</span>
+                            </Button>
+                            <Button size="sm" className="flex items-center gap-1">
+                              <ExternalLink className="h-3 w-3" />
+                              <span>View</span>
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </main>
       </div>
     </SidebarProvider>
   );
-};
-
-export default FactCheckPage;
+}

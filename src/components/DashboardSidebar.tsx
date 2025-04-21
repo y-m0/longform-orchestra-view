@@ -21,8 +21,15 @@ import {
   Users,
   Settings,
   ChevronLeft,
+  BarChart2,
+  Link,
+  ShieldCheck,
+  ListOrdered,
+  Pen,
+  Search,
+  Check,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 export function DashboardSidebar() {
   const menuItems = [
@@ -32,34 +39,49 @@ export function DashboardSidebar() {
       icon: LayoutDashboard,
     },
     {
-      title: "Scripts",
+      title: "Content",
       path: "/scripts",
       icon: FileText,
     },
     {
-      title: "Video",
-      path: "/video",
-      icon: Video,
+      title: "Planning",
+      path: "/planning",
+      icon: Calendar,
+    },
+    {
+      title: "Agents",
+      path: "/agents",
+      icon: Users,
+    },
+    {
+      title: "Workflows",
+      path: "/workflows",
+      icon: Clock,
+    },
+    {
+      title: "Series & Themes",
+      path: "/series",
+      icon: ListOrdered,
+    },
+    {
+      title: "Analytics",
+      path: "/analytics",
+      icon: BarChart2,
+    },
+    {
+      title: "Publishing",
+      path: "/publishing",
+      icon: Link,
+    },
+    {
+      title: "Quality & Compliance",
+      path: "/compliance",
+      icon: ShieldCheck,
     },
     {
       title: "Media Assets",
       path: "/assets",
       icon: Image,
-    },
-    {
-      title: "Schedule",
-      path: "/schedule",
-      icon: Calendar,
-    },
-    {
-      title: "Timeline",
-      path: "/timeline",
-      icon: Clock,
-    },
-    {
-      title: "Team",
-      path: "/team",
-      icon: Users,
     },
   ];
 
@@ -75,19 +97,59 @@ export function DashboardSidebar() {
       
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Orchestration</SidebarGroupLabel>
+          <SidebarGroupLabel>Media Intelligence</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <Link to={item.path} className="flex items-center gap-3">
+                    <RouterLink to={item.path} className="flex items-center gap-3">
                       <item.icon size={18} />
                       <span>{item.title}</span>
-                    </Link>
+                    </RouterLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        
+        <SidebarGroup>
+          <SidebarGroupLabel>Editorial Tools</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <RouterLink to="/editor" className="flex items-center gap-3">
+                    <Pen size={18} />
+                    <span>Writer</span>
+                  </RouterLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <RouterLink to="/seo" className="flex items-center gap-3">
+                    <Search size={18} />
+                    <span>SEO Tools</span>
+                  </RouterLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <RouterLink to="/fact-check" className="flex items-center gap-3">
+                    <FileText size={18} />
+                    <span>Fact Checker</span>
+                  </RouterLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <RouterLink to="/approval" className="flex items-center gap-3">
+                    <Check size={18} />
+                    <span>Approval</span>
+                  </RouterLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -97,10 +159,10 @@ export function DashboardSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link to="/settings" className="flex items-center gap-3">
+              <RouterLink to="/settings" className="flex items-center gap-3">
                 <Settings size={18} />
                 <span>Settings</span>
-              </Link>
+              </RouterLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -111,7 +173,7 @@ export function DashboardSidebar() {
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-medium">John Doe</span>
-              <span className="text-xs text-sidebar-foreground/70">Director</span>
+              <span className="text-xs text-sidebar-foreground/70">Editor-in-Chief</span>
             </div>
           </div>
         </div>

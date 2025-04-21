@@ -1,35 +1,35 @@
 
-import { Clock, FileText, Video, Image } from "lucide-react";
+import { Clock, FileText, Users, BarChart2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 export function StatsCards() {
   const stats = [
     {
-      title: "Active Projects",
-      value: "12",
-      change: "+2",
+      title: "Active Articles",
+      value: "24",
+      change: "+3",
       icon: FileText,
       color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
     },
     {
-      title: "Media Assets",
-      value: "1,204",
-      change: "+43",
-      icon: Image,
+      title: "Total Agents",
+      value: "12",
+      change: "+2",
+      icon: Users,
       color: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
     },
     {
-      title: "Hours Footage",
-      value: "264",
-      change: "+12",
-      icon: Video,
+      title: "Workflow Runs",
+      value: "168",
+      change: "+14",
+      icon: Clock,
       color: "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400",
     },
     {
-      title: "Production Time",
-      value: "86h",
-      change: "+6",
-      icon: Clock,
+      title: "Avg. Readability",
+      value: "72",
+      change: "+4",
+      icon: BarChart2,
       color: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
     },
   ];

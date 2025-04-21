@@ -7,7 +7,7 @@ export function DashboardHeader() {
   return (
     <div className="flex items-center justify-between border-b px-6 py-3">
       <div className="flex items-center gap-2">
-        <h1 className="text-xl font-semibold">Orchestration Dashboard</h1>
+        <h1 className="text-xl font-semibold">Media Intelligence Dashboard</h1>
       </div>
       
       <div className="flex items-center gap-4">
@@ -15,7 +15,7 @@ export function DashboardHeader() {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search media..."
+            placeholder="Search content..."
             className="w-full bg-muted/30 pl-8"
           />
         </div>

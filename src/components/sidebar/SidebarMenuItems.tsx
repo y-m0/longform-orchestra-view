@@ -22,7 +22,10 @@ export function SidebarMenuItems({ isActiveRoute }: SidebarMenuItemsProps) {
         <SidebarGroupContent>
           <SidebarMenu>
             {menuItems.map((item) => (
-              <SidebarMenuItem key={item.title} className={isActiveRoute(item.path) ? "bg-sidebar-accent/60" : ""}>
+              <SidebarMenuItem
+                key={item.title}
+                className={isActiveRoute(item.path) ? "bg-sidebar-accent/60" : ""}
+              >
                 <SidebarMenuButton asChild>
                   <RouterLink to={item.path} className="flex items-center gap-3">
                     <item.icon size={18} />

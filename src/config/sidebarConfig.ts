@@ -4,16 +4,10 @@ import {
   FileText,
   BarChart2,
   Link as LinkIcon,
-  Pen,
-  Search,
-  Check,
   Users,
   Image,
-  Calendar,
-  Folder,
   BookOpen,
-  MapPin,
-  Square,
+  Settings as SettingsIcon,
 } from "lucide-react";
 
 export const menuItems = [
@@ -51,6 +45,11 @@ export const menuItems = [
     title: "Asset Library",
     path: "/assets",
     icon: Image,
+  },
+  {
+    title: "Settings",
+    path: "/settings",
+    icon: SettingsIcon,
   },
 ];
 

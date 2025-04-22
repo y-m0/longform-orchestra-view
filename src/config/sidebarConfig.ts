@@ -11,6 +11,9 @@ import {
   Image,
   Calendar,
   Folder,
+  BookOpen,
+  MapPin,
+  Square,
 } from "lucide-react";
 
 export const menuItems = [
@@ -23,6 +26,11 @@ export const menuItems = [
     title: "Campaigns",
     path: "/scripts",
     icon: FileText,
+  },
+  {
+    title: "Story Elements",
+    path: "/story-elements",
+    icon: BookOpen,
   },
   {
     title: "Analytics",

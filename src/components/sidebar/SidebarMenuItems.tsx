@@ -1,5 +1,5 @@
 
-import { menuItems, creativeTools } from "@/config/sidebarConfig";
+import { menuItems } from "@/config/sidebarConfig";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -22,24 +22,6 @@ export function SidebarMenuItems({ isActiveRoute }: SidebarMenuItemsProps) {
         <SidebarGroupContent>
           <SidebarMenu>
             {menuItems.map((item) => (
-              <SidebarMenuItem key={item.title} className={isActiveRoute(item.path) ? "bg-sidebar-accent/60" : ""}>
-                <SidebarMenuButton asChild>
-                  <RouterLink to={item.path} className="flex items-center gap-3">
-                    <item.icon size={18} />
-                    <span>{item.title}</span>
-                  </RouterLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-      
-      <SidebarGroup>
-        <SidebarGroupLabel>Creative Toolkit</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {creativeTools.map((item) => (
               <SidebarMenuItem key={item.title} className={isActiveRoute(item.path) ? "bg-sidebar-accent/60" : ""}>
                 <SidebarMenuButton asChild>
                   <RouterLink to={item.path} className="flex items-center gap-3">

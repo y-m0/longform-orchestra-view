@@ -54,35 +54,4 @@ export const menuItems = [
   },
 ];
 
-export const creativeTools = [
-  {
-    title: "Creator Studio",
-    path: "/editor",
-    icon: Pen,
-  },
-  {
-    title: "SEO Tools",
-    path: "/seo",
-    icon: Search,
-  },
-  {
-    title: "Content Verification",
-    path: "/fact-check",
-    icon: Check,
-  },
-  {
-    title: "Campaign Approval",
-    path: "/approval",
-    icon: Check,
-  },
-  {
-    title: "Brief Templates",
-    path: "/briefs",
-    icon: Folder,
-  },
-  {
-    title: "Media Planning",
-    path: "/planning",
-    icon: Calendar,
-  },
-];
+// Removed creativeTools export, as the toolkit section is no longer shown in the sidebar.

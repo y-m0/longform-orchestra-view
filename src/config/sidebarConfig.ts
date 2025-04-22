@@ -7,7 +7,7 @@ import {
   Users,
   Image,
   BookOpen,
-  Settings as SettingsIcon,
+  Settings,
 } from "lucide-react";
 
 export const menuItems = [
@@ -49,8 +49,6 @@ export const menuItems = [
   {
     title: "Settings",
     path: "/settings",
-    icon: SettingsIcon,
+    icon: Settings,
   },
 ];
-
-// Removed creativeTools export, as the toolkit section is no longer shown in the sidebar.

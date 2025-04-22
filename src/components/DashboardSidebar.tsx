@@ -4,12 +4,8 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Settings } from "lucide-react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { SidebarMenuItems } from "./sidebar/SidebarMenuItems";
 import { UserProfile } from "./sidebar/UserProfile";
 
@@ -43,16 +39,6 @@ export function DashboardSidebar() {
       </SidebarContent>
       
       <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem className={isActiveRoute("/settings") ? "bg-sidebar-accent/60" : ""}>
-            <SidebarMenuButton asChild>
-              <RouterLink to="/settings" className="flex items-center gap-3">
-                <Settings size={18} />
-                <span>Settings</span>
-              </RouterLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
         <UserProfile />
       </SidebarFooter>
     </Sidebar>

@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link, ArrowLeft, ArrowRight, Clock, LayersLinked } from "lucide-react";
+import { Link, ArrowLeft, ArrowRight, Clock, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -34,7 +34,7 @@ export function EdgePanel() {
     {
       type: "dependencies",
       title: "Dependencies",
-      icon: LayersLinked,
+      icon: Layers,
       color: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
       count: 14,
       description: "Causal or logical dependencies"

@@ -16,7 +16,7 @@ export function DashboardHeader() {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">
           <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">
-            AdCraft Studio
+            Media Center
           </span>
         </h1>
         <div className="flex items-center gap-4">

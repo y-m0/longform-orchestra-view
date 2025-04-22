@@ -33,7 +33,7 @@ export function DashboardSidebar() {
       <SidebarHeader>
         <div className="flex items-center gap-2 px-6 py-4 text-xl font-bold">
           <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            AdCraft Studio
+            Media Center
           </span>
         </div>
       </SidebarHeader>
